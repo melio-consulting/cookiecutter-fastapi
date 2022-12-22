@@ -1,0 +1,35 @@
+name: Test and Lint Project 
+run-name: test-and-lint-project
+on: [push]
+jobs:
+  GCP-Cloud-Build-and-Cloud-Run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - id: 'checkout'
+        name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - id: 'setup'
+        name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - id: 'dependencies'
+        name: Install dependencies
+        run: |
+          make install
+
+      - id: 'pytest'
+        name: Test with pytest
+        run: |
+          make test

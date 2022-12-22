@@ -6,6 +6,7 @@
     "machine_learn_model_name": "model.pkl",
     "input_example_path": "./ml/model/examples/example.json",
     "full_name": "Your name",
+    "deploy_cloud": ["", "aws", "gcp"],
     "email": "Your address email (you@example.com)",
     "release_date": "{% now 'local' %}",
     "version": "0.1.0",
@@ -13,6 +14,8 @@
         "jinja2_time.TimeExtension"
     ],
     "_copy_without_render": [
-        "*ci.yaml"
+        "*github-actions.yaml",
+        "*github-actions-aws.yaml",
+        "*github-actions-gcp.yaml"
     ]
 }
